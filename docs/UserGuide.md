@@ -184,9 +184,35 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
+### Add a teaching schedule `sadd`
+
+Adds a schedule of a module in the adressbook. 
+
+**Format**: `sadd m/MODULE_CODE w/WEEKDAY ct/PERIOD cc/CLASS_TYPE cv/VENUE `
+
+- Adds a schedule with the module it belongs to, the weekday, the time period, the type of the class, and the venue.
+- `MODULE_CODE` needs to abide by the [Module Code Format of NUS ](https://www.nus.edu.sg/registrar/docs/info/nusbulletin/AY201213_GeneralInformation.pdf) 
+- The `WEEKDAY` should be one of `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
+- The `PERIOD` includes the start time and the end time which are both in the format of the *modern 24-hour clock*.
+- The `CLASS_TYPE` should be one of `lec`, `tut`, `lab`, and `rec`, which represent lecture, tutorial, laborartory, and reflection respectively.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Please make sure you have added the module with `MODULE_CODE` before you add any schedules with `MODULE_CODE`. Otherwise, address book will consider the command to be invalid.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If the schedule to be added conflicts with any existing schedule, the address book will not perform any operation.
+</div>
+
+**Example**: `sadd m/CS2103T w/Friday ct/16:00-18:00 cc/lec cv/I3-AUD`
+
+
+
 ### View your teaching schedule: `view schedule`
 
-**Syntax**: `view schedule [-w WEEKDAY] [-m MODULE_CODE] [-d DATE] [-h] [-v]`
+Views the teaching schedule that have been added to the address book.
+
+**Format**: `view schedule [-w WEEKDAY] [-m MODULE_CODE] [-d DATE] [-h] [-v]`
 
 - `-w WEEKDAY` option shows your schedule on the `WEEKDAY`. `WEEKDAY` should be one of `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
 - `-m MODULE_NAME` option shows your weekly schedule of `MODULE_CODE`.
