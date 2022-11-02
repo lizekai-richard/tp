@@ -3,6 +3,7 @@ package seedu.address.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -144,6 +145,7 @@ public class UniqueModuleList implements Iterable<Module> {
             List<Schedule> schedules = module.getSchedules();
             internalScheduleList.addAll(schedules);
         }
+        Collections.sort(internalScheduleList);
         return internalScheduleList;
     }
 
@@ -155,6 +157,5 @@ public class UniqueModuleList implements Iterable<Module> {
 
         return internalUnmodifiableScheduleList;
     }
-
 
 }

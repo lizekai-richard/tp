@@ -52,7 +52,7 @@ public class ScheduleCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         module.setText(schedule.getModule().toUpperCase());
         weekday.setText(schedule.getWeekday().name() + ", ");
-        classType.setText(schedule.getClassType().name());
+        classType.setText(schedule.getClassType().name() + "  [" + schedule.getClassGroup() + "]");
         startTime.setText(schedule.getStartTime() + " - ");
         endTime.setText(schedule.getEndTime());
         venue.setText("Venue: " + schedule.getVenue().toString());
@@ -83,12 +83,10 @@ public class ScheduleCard extends UiPart<Region> {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof PersonCard)) {
             return false;
         }
-
         // state check
         ScheduleCard card = (ScheduleCard) other;
         return id.getText().equals(card.id.getText()) && schedule.equals(card.schedule);

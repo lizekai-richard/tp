@@ -8,10 +8,9 @@ import java.util.regex.Pattern;
 /**
  * Represents a schedule of a module
  */
-public class Schedule {
+public class Schedule implements Comparable<Schedule> {
     public static final String MESSAGE_WEEKDAYS_CONSTRAINT = "Weekday should be one of Monday, Tuesday, Wednesday, "
             + "Thursday, Friday, Saturday, and Sunday.";
-
 
     public static final String MESSAGE_TIMESLOT_CONSTRAINT = "The time slot of a class should follow the 24:00-format"
             + " : HH:MM-HH:MM" + " (space not allowed)\n"
@@ -171,6 +170,26 @@ public class Schedule {
         return getHour(endTime) - getHour(startTime);
     }
 
+    private int getWeekdayIndex() {
+        switch (weekday) {
+        case Monday:
+            return 1;
+        case Tuesday:
+            return 2;
+        case Wednesday:
+            return 3;
+        case Thursday:
+            return 4;
+        case Friday:
+            return 5;
+        case Saturday:
+            return 6;
+        case Sunday:
+            return 7;
+        default:
+            return 0;
+        }
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -187,6 +206,19 @@ public class Schedule {
                 && otherSchedule.endTime.equals(this.endTime)
                 && otherSchedule.classType.equals(this.classType)
                 && otherSchedule.classGroup.equals(this.classGroup);
+    }
+
+    @Override
+    public int compareTo(Schedule other) {
+        if (getWeekdayIndex() < other.getWeekdayIndex()) {
+            return -1;
+        }
+        if (getWeekdayIndex() > other.getWeekdayIndex()) {
+            return 1;
+        }
+        double startHour = getHour(startTime);
+        double otherStartHour = other.getHour(other.startTime);
+        return (int) (startHour - otherStartHour);
     }
 
 }
